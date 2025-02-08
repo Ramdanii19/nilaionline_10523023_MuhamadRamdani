@@ -8,6 +8,12 @@ LEFT JOIN dosen ON dosen.nip = nilai.nip
 ";
 $resultNilai = mysqli_query($koneksi, $queryNilai);
 $countNilai = mysqli_num_rows($resultNilai);
+
+session_start();
+if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'dosen' && $_SESSION['role'] !== 'admin')) {
+  header("Location: ../index.php");
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +66,9 @@ $countNilai = mysqli_num_rows($resultNilai);
           <th>Nilai Akhir</th>
           <th>Mata Kuliah</th>
           <th>Dosen</th>
-          <th>Aksi</th>
+          <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'dosen')) : ?>
+            <th>Aksi</th>
+          <?php endif; ?>
         </tr>
         <?php
 
@@ -74,10 +82,12 @@ $countNilai = mysqli_num_rows($resultNilai);
             echo "<td>" . $dataNilai['total_nilai'] . "</td>";
             echo "<td>" . $dataNilai['nip'] . "</td>";
             echo "<td>" . $dataNilai['nama_dosen'] . "</td>";
-            echo "<td>
+            if ($_SESSION['role'] == "admin" || $_SESSION['role'] == "dosen") {
+              echo "<td>
               <a href='nilaiEdit.php?nim=" . $dataNilai['nim'] . "'>Edit</a> |
               <a href='nilaiDelete.php?nim=" . $dataNilai['nim'] . "' onclick='return confirm(\"Yakin ingin menghapus?\")'>Delete</a>
             </td>";
+            }
             echo "</tr>";
           }
         } else {

@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
   if ($result->num_rows > 0) {
     $_SESSION['role'] = 'dosen';
     $_SESSION['nip'] = $username;
-    header("Location: admin/dosenView.php");
+    header("Location: dosen/nilaiView.php");
     exit();
   }
 

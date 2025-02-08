@@ -3,6 +3,12 @@ include "../koneksi/koneksi.php";
 $editDosen = "SELECT * FROM dosen";
 $resultDosen = mysqli_query($koneksi, $editDosen);
 $dataDosen = mysqli_fetch_array($resultDosen);
+
+if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'dosen' && $_SESSION['role'] !== 'admin')) {
+  header("Location: ../index.php");
+  exit();
+}
+
 ?>
 
 <!DOCTYPE html>

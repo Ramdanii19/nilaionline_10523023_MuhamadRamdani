@@ -4,6 +4,13 @@ include "../koneksi/koneksi.php";
 $queryDosen = "SELECT * FROM dosen";
 $resultDosen = mysqli_query($koneksi, $queryDosen);
 $countDosen = mysqli_num_rows($resultDosen);
+
+session_start();
+
+if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin')) {
+  header("Location: ../index.php");
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +58,9 @@ $countDosen = mysqli_num_rows($resultDosen);
           <th>NIP</th>
           <th>Nama</th>
           <th>Kode Matkul</th>
-          <th>Aksi</th>
+          <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
+            <th>Aksi</th>
+          <?php endif; ?>
         </tr>
         <?php
 
@@ -60,10 +69,12 @@ $countDosen = mysqli_num_rows($resultDosen);
             echo "<td>" . $dataDosen['nip'] . "</td>";
             echo "<td>" . $dataDosen['nama'] . "</td>";
             echo "<td>" . $dataDosen['kode_matkul'] . "</td>";
-            echo "<td>
+            if ($_SESSION['role'] == "admin") {
+              echo "<td>
               <a href='DosenEdit.php?nip=" . $dataDosen['nip'] . "'>Edit</a> |
               <a href='DosenDelete.php?nip=" . $dataDosen['nip'] . "' onclick='return confirm(\"Yakin ingin menghapus?\")'>Delete</a>
             </td>";
+            }
             echo "</tr>";
           }
         } else {

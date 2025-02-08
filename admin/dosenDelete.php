@@ -1,6 +1,11 @@
 <?php
 include "../koneksi/koneksi.php";
 
+if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin')) {
+  header("Location: ../index.php");
+  exit();
+}
+
 $nip = $_GET["nip"];
 $delDosen = "DELETE FROM dosen WHERE nip='$nip'";
 $resultDosen = mysqli_query($koneksi, $delDosen);

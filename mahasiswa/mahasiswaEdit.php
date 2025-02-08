@@ -5,6 +5,13 @@ $getNim = $_GET["nim"];
 $editMhs = "SELECT * FROM mahasiswa WHERE nim='$getNim'";
 $resultMhs = mysqli_query($koneksi, $editMhs);
 $dataMhs = mysqli_fetch_array($resultMhs);
+
+session_start();
+
+if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin')) {
+  header("Location: ../index.php");
+  exit();
+}
 ?>
 
 <!DOCTYPE html>

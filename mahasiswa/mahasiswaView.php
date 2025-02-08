@@ -4,6 +4,13 @@ include "../koneksi/koneksi.php";
 $queryMhs = "SELECT * FROM mahasiswa";
 $resultMhs = mysqli_query($koneksi, $queryMhs);
 $countMhs = mysqli_num_rows($resultMhs);
+
+session_start();
+
+if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'mahasiswa' && $_SESSION['role'] !== 'admin')) {
+  header("Location: ../index.php");
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +59,9 @@ $countMhs = mysqli_num_rows($resultMhs);
           <th>Nama</th>
           <th>Jenis Kelamin</th>
           <th>Jurusan</th>
-          <th>Aksi</th>
+          <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
+            <th>Aksi</th>
+          <?php endif; ?>
         </tr>
         <?php
 
@@ -62,10 +71,12 @@ $countMhs = mysqli_num_rows($resultMhs);
             echo "<td>" . $dataMhs['nama'] . "</td>";
             echo "<td>" . $dataMhs['jk'] . "</td>";
             echo "<td>" . $dataMhs['jur'] . "</td>";
-            echo "<td>
-              <a href='mahasiswaEdit.php?nim=" . $dataMhs['nim'] . "'>Edit</a> |
-              <a href='mahasiswaDelete.php?nim=" . $dataMhs['nim'] . "' onclick='return confirm(\"Yakin ingin menghapus?\")'>Delete</a>
-            </td>";
+            if ($_SESSION['role'] == "admin") {
+              echo "<td>";
+              echo "<a href='mahasiswaEdit.php?nim=" . $dataMhs['nim'] . "'>Edit</a> | ";
+              echo "<a href='mahasiswaDelete.php?nim=" . $dataMhs['nim'] . "' onclick='return confirm(\"Yakin ingin menghapus?\")'>Delete</a>";
+              echo "</td>";
+            }
             echo "</tr>";
           }
         } else {
