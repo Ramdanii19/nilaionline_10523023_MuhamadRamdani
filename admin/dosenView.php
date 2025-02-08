@@ -1,13 +1,9 @@
 <?php
 include "../koneksi/koneksi.php";
 
-$queryNilai = "SELECT mahasiswa.nim, mahasiswa.nama AS nama_mahasiswa, nilai.tugas, nilai.uts, nilai.uas, (0.2 * nilai.tugas) + (0.4 * nilai.uts) + (0.4 *
-nilai.uas) AS total_nilai, dosen.nip, dosen.nama AS nama_dosen FROM nilai
-LEFT JOIN mahasiswa ON nilai.nim = mahasiswa.nim
-RIGHT JOIN dosen ON dosen.nip = nilai.nip
-";
-$resultNilai = mysqli_query($koneksi, $queryNilai);
-$countNilai = mysqli_num_rows($resultNilai);
+$queryDosen = "SELECT * FROM dosen";
+$resultDosen = mysqli_query($koneksi, $queryDosen);
+$countDosen = mysqli_num_rows($resultDosen);
 ?>
 
 <!DOCTYPE html>
@@ -35,9 +31,9 @@ $countNilai = mysqli_num_rows($resultNilai);
   <section id="navigator">
     <ul class="menus">
       <li><a href="../admin/index.php">Home</a></li>
-      <li><a href="../mahasiswa/mahasiswaView.php">Mahasiswa</a></li>
+      <li><a href="mahasiswaView.php">Mahasiswa</a></li>
       <li><a href="../admin/dosenView.php">Dosen</a></li>
-      <li><a href="nilaiView.php">Nilai</a></li>
+      <li><a href="../dosen/nilaiView.php">Nilai</a></li>
       <li><a href="../index.php">Logout</a></li>
     </ul>
   </section>
@@ -46,44 +42,34 @@ $countNilai = mysqli_num_rows($resultNilai);
     <br><br><br>
     <div style="padding: 0 30px 0 30px;">
       <div style="display: flex; justify-content: end;">
-        <a href="nilaiAdd.php" style="background-color: green; padding: 10px 20px 10px 20px; border-radius: 7px; font-weight: bold;">Tambah Data Nilai</a>
+        <a href="mahasiswaAdd.php" style="background-color: green; padding: 10px 20px 10px 20px; border-radius: 7px; font-weight: bold;">Tambah Data Mahasiswa</a>
       </div>
       <br><br>
 
       <table style="width: 100%; color: white; border-collapse: collapse; border: white;" border="1">
         <tr>
-          <th>NIM</th>
+          <th>NIP</th>
           <th>Nama</th>
-          <th>Tugas</th>
-          <th>UTS</th>
-          <th>UAS</th>
-          <th>Nilai Akhir</th>
-          <th>Mata Kuliah</th>
-          <th>Dosen</th>
+          <th>Kode Matkul</th>
           <th>Aksi</th>
         </tr>
         <?php
 
-        if ($countNilai > 0) {
-          while ($dataNilai = mysqli_fetch_array($resultNilai, MYSQLI_ASSOC)) {
-            echo "<td>" . $dataNilai['nim'] . "</td>";
-            echo "<td>" . $dataNilai['nama_mahasiswa'] . "</td>";
-            echo "<td>" . $dataNilai['tugas'] . "</td>";
-            echo "<td>" . $dataNilai['uts'] . "</td>";
-            echo "<td>" . $dataNilai['uas'] . "</td>";
-            echo "<td>" . $dataNilai['total_nilai'] . "</td>";
-            echo "<td>" . $dataNilai['nip'] . "</td>";
-            echo "<td>" . $dataNilai['nama_dosen'] . "</td>";
+        if ($countDosen > 0) {
+          while ($dataDosen = mysqli_fetch_array($resultDosen, MYSQLI_ASSOC)) {
+            echo "<td>" . $dataDosen['nip'] . "</td>";
+            echo "<td>" . $dataDosen['nama'] . "</td>";
+            echo "<td>" . $dataDosen['kode_matkul'] . "</td>";
             echo "<td>
-              <a href='nilaiEdit.php?nim=" . $dataNilai['nim'] . "'>Edit</a> |
-              <a href='nilaiDelete.php?nim=" . $dataNilai['nim'] . "' onclick='return confirm(\"Yakin ingin menghapus?\")'>Delete</a>
+              <a href='DosenEdit.php?nip=" . $dataDosen['nip'] . "'>Edit</a> |
+              <a href='DosenDelete.php?nip=" . $dataDosen['nip'] . "' onclick='return confirm(\"Yakin ingin menghapus?\")'>Delete</a>
             </td>";
             echo "</tr>";
           }
         } else {
           echo "<tr>
                 <td colspan='9' align='center' height='20'>
-                  <div> Belum ada data Nilai </div>
+                  <div> Belum ada data Dosen </div>
                 </td>
             </tr>";
         }

@@ -50,8 +50,8 @@
 	</section>
 
 	<footer>
-		<font color=#000> Copyright &copy; 2023 - Universitas Komputer Indonesia <br />
-			Developed By <a href="#" target="_new">YourName</a> </font>
+		<font color=#000> Copyright &copy; 2025 - Universitas Komputer Indonesia <br />
+			Developed By <a href="#" target="_new">10523023 Muhamad Ramdani</a> </font>
 	</footer>
 
 </body>
