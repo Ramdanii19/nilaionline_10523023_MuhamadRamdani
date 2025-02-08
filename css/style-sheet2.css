@@ -25,7 +25,7 @@ a {
 	-o-transition: all 0.2s ease-in;
 	transition: all 0.2s ease-in;
 }
-a:hover { color: #666; text-decoration: underline; }
+a:hover { color: #ffffff; }
 
 p {
 	font-size: 12px;
