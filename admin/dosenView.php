@@ -31,8 +31,8 @@ $countDosen = mysqli_num_rows($resultDosen);
   <section id="navigator">
     <ul class="menus">
       <li><a href="../admin/index.php">Home</a></li>
-      <li><a href="mahasiswaView.php">Mahasiswa</a></li>
-      <li><a href="../admin/dosenView.php">Dosen</a></li>
+      <li><a href="../mahasiswa/mahasiswaView.php">Mahasiswa</a></li>
+      <li><a href="dosenView.php">Dosen</a></li>
       <li><a href="../dosen/nilaiView.php">Nilai</a></li>
       <li><a href="../index.php">Logout</a></li>
     </ul>
