@@ -1,19 +1,35 @@
 <?php
 include "../koneksi/koneksi.php";
 
-$queryNilai = "SELECT mahasiswa.nim, mahasiswa.nama AS nama_mahasiswa, nilai.tugas, nilai.uts, nilai.uas, (0.2 * nilai.tugas) + (0.4 * nilai.uts) + (0.4 *
-nilai.uas) AS total_nilai, dosen.nip, dosen.nama AS nama_dosen FROM nilai
-LEFT JOIN mahasiswa ON nilai.nim = mahasiswa.nim
-LEFT JOIN dosen ON dosen.nip = nilai.nip
-";
-$resultNilai = mysqli_query($koneksi, $queryNilai);
-$countNilai = mysqli_num_rows($resultNilai);
-
 session_start();
+
 if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'dosen' && $_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'mahasiswa')) {
   header("Location: ../index.php");
   exit();
 }
+
+if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'dosen') {
+  $queryNilai = "SELECT mahasiswa.nim, mahasiswa.nama AS nama_mahasiswa, 
+                   nilai.tugas, nilai.uts, nilai.uas, 
+                   (0.2 * nilai.tugas) + (0.4 * nilai.uts) + (0.4 * nilai.uas) AS total_nilai, 
+                   dosen.nip, dosen.nama AS nama_dosen 
+                   FROM nilai
+                   LEFT JOIN mahasiswa ON nilai.nim = mahasiswa.nim
+                   LEFT JOIN dosen ON dosen.nip = nilai.nip";
+} else {
+  $nim = $_SESSION['nim'];
+  $queryNilai = "SELECT mahasiswa.nim, mahasiswa.nama AS nama_mahasiswa, 
+                   nilai.tugas, nilai.uts, nilai.uas, 
+                   (0.2 * nilai.tugas) + (0.4 * nilai.uts) + (0.4 * nilai.uas) AS total_nilai, 
+                   dosen.nip, dosen.nama AS nama_dosen 
+                   FROM nilai
+                   LEFT JOIN mahasiswa ON nilai.nim = mahasiswa.nim
+                   LEFT JOIN dosen ON dosen.nip = nilai.nip
+                   WHERE mahasiswa.nim = '$nim'";
+}
+
+$resultNilai = mysqli_query($koneksi, $queryNilai);
+$countNilai = mysqli_num_rows($resultNilai);
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +57,9 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'dosen' && $_SESSION['ro
   <section id="navigator">
     <ul class="menus">
       <li><a href="../admin/index.php">Home</a></li>
-      <li><a href="../mahasiswa/mahasiswaView.php">Mahasiswa</a></li>
+      <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'mahasiswa')) : ?>
+        <li><a href="../mahasiswa/mahasiswaView.php">Mahasiswa</a></li>
+      <?php endif; ?>
       <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
         <li><a href="../admin/dosenView.php">Dosen</a></li>
       <?php endif; ?>
@@ -53,9 +71,11 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'dosen' && $_SESSION['ro
   <section id="container">
     <br><br><br>
     <div style="padding: 0 30px 0 30px;">
-      <div style="display: flex; justify-content: end;">
-        <a href="nilaiAdd.php" style="background-color: green; padding: 10px 20px 10px 20px; border-radius: 7px; font-weight: bold;">Tambah Data Nilai</a>
-      </div>
+      <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'dosen')) : ?>
+        <div style="display: flex; justify-content: end;">
+          <a href="nilaiAdd.php" style="background-color: green; padding: 10px 20px 10px 20px; border-radius: 7px; font-weight: bold;">Tambah Data Nilai</a>
+        </div>
+      <?php endif; ?>
       <br><br>
 
       <table style="width: 100%; color: white; border-collapse: collapse; border: white;" border="1">

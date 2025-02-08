@@ -4,11 +4,11 @@ $editDosen = "SELECT * FROM dosen";
 $resultDosen = mysqli_query($koneksi, $editDosen);
 $dataDosen = mysqli_fetch_array($resultDosen);
 
-if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'dosen' && $_SESSION['role'] !== 'admin')) {
+session_start();
+if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['dosen', 'admin'])) {
   header("Location: ../index.php");
   exit();
 }
-
 ?>
 
 <!DOCTYPE html>

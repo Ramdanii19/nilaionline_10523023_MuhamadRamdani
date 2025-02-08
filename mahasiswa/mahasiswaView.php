@@ -1,16 +1,22 @@
 <?php
 include "../koneksi/koneksi.php";
 
-$queryMhs = "SELECT * FROM mahasiswa";
-$resultMhs = mysqli_query($koneksi, $queryMhs);
-$countMhs = mysqli_num_rows($resultMhs);
-
 session_start();
 
 if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'mahasiswa' && $_SESSION['role'] !== 'admin')) {
   header("Location: ../index.php");
   exit();
 }
+
+if ($_SESSION['role'] === 'admin') {
+  $queryMhs = "SELECT * FROM mahasiswa";
+} else {
+  $nim = $_SESSION['nim'];
+  $queryMhs = "SELECT * FROM mahasiswa WHERE nim = '$nim'";
+}
+
+$resultMhs = mysqli_query($koneksi, $queryMhs);
+$countMhs = mysqli_num_rows($resultMhs);
 ?>
 
 <!DOCTYPE html>
@@ -50,9 +56,11 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'mahasiswa' && $_SESSION
   <section id="container">
     <br><br><br>
     <div style="padding: 0 30px 0 30px;">
-      <div style="display: flex; justify-content: end;">
-        <a href="mahasiswaAdd.php" style="background-color: green; padding: 10px 20px 10px 20px; border-radius: 7px; font-weight: bold;">Tambah Data Mahasiswa</a>
-      </div>
+      <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
+        <div style="display: flex; justify-content: end;">
+          <a href="mahasiswaAdd.php" style="background-color: green; padding: 10px 20px 10px 20px; border-radius: 7px; font-weight: bold;">Tambah Data Mahasiswa</a>
+        </div>
+      <?php endif; ?>
       <br><br>
 
       <table style="width: 100%; color: white; border-collapse: collapse; border: white;" border="1">

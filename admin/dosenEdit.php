@@ -6,6 +6,7 @@ $editDosen = "SELECT * FROM dosen WHERE nip='$getNip'";
 $resultDosen = mysqli_query($koneksi, $editDosen);
 $dataDosen = mysqli_fetch_array($resultDosen);
 
+session_start();
 if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin')) {
   header("Location: ../index.php");
   exit();
