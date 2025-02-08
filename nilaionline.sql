@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 08, 2025 at 03:33 AM
+-- Generation Time: Feb 08, 2025 at 07:22 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.16
 
@@ -38,7 +38,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`username`, `password`, `nama`) VALUES
-('admin', 'password', 'Admin');
+('admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin');
 
 -- --------------------------------------------------------
 
@@ -58,7 +58,8 @@ CREATE TABLE `dosen` (
 --
 
 INSERT INTO `dosen` (`nip`, `nama`, `kode_matkul`, `password`) VALUES
-('DS001', 'Rauf Fauzan, M.Kom', 'SI001', 'password\r\n');
+('DS001', 'Rauf Fauzan, M.Kom', 'PW001', '5f4dcc3b5aa765d61d8327deb882cf99'),
+('DS002', 'Dosen', 'PW002', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 -- --------------------------------------------------------
 
@@ -79,7 +80,8 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`nim`, `nama`, `jk`, `jur`, `password`) VALUES
-('10523023', 'Muhamad Ramdani', 'laki-laki', 'Sistem Informasi', 'password');
+('10523023', 'Ramdani', 'Laki-Laki', 'Sistem Informasi', '5f4dcc3b5aa765d61d8327deb882cf99'),
+('10101011', 'mahasiswa', 'Perempuan', 'Teknik Informatika', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 -- --------------------------------------------------------
 
@@ -119,7 +121,7 @@ CREATE TABLE `nilai` (
 --
 
 INSERT INTO `nilai` (`tugas`, `uts`, `uas`, `nim`, `nip`) VALUES
-(95, 98, 97, '10523023', 'DS001');
+(97, 98, 96, '10523023', 'DS001');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

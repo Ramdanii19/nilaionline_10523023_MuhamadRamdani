@@ -4,7 +4,7 @@ include "../koneksi/koneksi.php";
 $queryNilai = "SELECT mahasiswa.nim, mahasiswa.nama AS nama_mahasiswa, nilai.tugas, nilai.uts, nilai.uas, (0.2 * nilai.tugas) + (0.4 * nilai.uts) + (0.4 *
 nilai.uas) AS total_nilai, dosen.nip, dosen.nama AS nama_dosen FROM nilai
 LEFT JOIN mahasiswa ON nilai.nim = mahasiswa.nim
-RIGHT JOIN dosen ON dosen.nip = nilai.nip
+LEFT JOIN dosen ON dosen.nip = nilai.nip
 ";
 $resultNilai = mysqli_query($koneksi, $queryNilai);
 $countNilai = mysqli_num_rows($resultNilai);

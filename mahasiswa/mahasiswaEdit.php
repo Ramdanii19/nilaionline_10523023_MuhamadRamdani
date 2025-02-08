@@ -64,7 +64,7 @@ $dataMhs = mysqli_fetch_array($resultMhs);
         <tr>
           <td>Password</td>
           <td>:</td>
-          <td><input type="text" name="password" size="30" placeholder="PASSWORD" value="<?php echo $dataMhs[4] ?>"></td>
+          <td><input type="password" name="password" size="30" placeholder="PASSWORD" value="<?php echo $dataMhs[4] ?>"></td>
         </tr>
         <tr>
           <td><input name="submit" type="submit" value="Edit" style="color: white; text-decoration: none; background-color: green; padding: 5px 15px 5px 15px; border-radius: 5px; margin-top: 20px; border: none;"> <a href="mahasiswaView.php" style="color: white; text-decoration: none; background-color: blue; padding: 5px 15px 5px 15px; border-radius: 5px; margin-top: 20px;">Kembali</a></td>
