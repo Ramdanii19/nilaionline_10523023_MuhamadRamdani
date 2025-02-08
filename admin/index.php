@@ -1,3 +1,13 @@
+<?php
+include "../koneksi/koneksi.php";
+session_start();
+
+if (!isset($_SESSION['role'])) {
+	header("Location: ../index.php");
+	exit();
+}
+?>
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -24,7 +34,9 @@
 		<ul class="menus">
 			<li><a href="index.php">Home</a></li>
 			<li><a href="../mahasiswa/mahasiswaView.php">Mahasiswa</a></li>
-			<li><a href="../admin/dosenView.php">Dosen</a></li>
+			<?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
+				<li><a href="../admin/dosenView.php">Dosen</a></li>
+			<?php endif; ?>
 			<li><a href="../dosen/nilaiView.php">Nilai</a></li>
 			<li><a href="../index.php">Logout</a></li>
 		</ul>

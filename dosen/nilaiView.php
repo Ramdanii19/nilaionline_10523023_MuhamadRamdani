@@ -10,7 +10,7 @@ $resultNilai = mysqli_query($koneksi, $queryNilai);
 $countNilai = mysqli_num_rows($resultNilai);
 
 session_start();
-if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'dosen' && $_SESSION['role'] !== 'admin')) {
+if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'dosen' && $_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'mahasiswa')) {
   header("Location: ../index.php");
   exit();
 }
@@ -42,7 +42,9 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'dosen' && $_SESSION['ro
     <ul class="menus">
       <li><a href="../admin/index.php">Home</a></li>
       <li><a href="../mahasiswa/mahasiswaView.php">Mahasiswa</a></li>
-      <li><a href="../admin/dosenView.php">Dosen</a></li>
+      <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
+        <li><a href="../admin/dosenView.php">Dosen</a></li>
+      <?php endif; ?>
       <li><a href="nilaiView.php">Nilai</a></li>
       <li><a href="../index.php">Logout</a></li>
     </ul>

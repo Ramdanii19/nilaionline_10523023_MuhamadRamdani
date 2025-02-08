@@ -39,7 +39,9 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'mahasiswa' && $_SESSION
     <ul class="menus">
       <li><a href="../admin/index.php">Home</a></li>
       <li><a href="mahasiswaView.php">Mahasiswa</a></li>
-      <li><a href="../admin/dosenView.php">Dosen</a></li>
+      <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
+        <li><a href="../admin/dosenView.php">Dosen</a></li>
+      <?php endif; ?>
       <li><a href="../dosen/nilaiView.php">Nilai</a></li>
       <li><a href="../logout.php">Logout</a></li>
     </ul>
