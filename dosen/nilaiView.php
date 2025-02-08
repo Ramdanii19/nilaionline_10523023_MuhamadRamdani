@@ -34,10 +34,10 @@ $countNilai = mysqli_num_rows($resultNilai);
 
   <section id="navigator">
     <ul class="menus">
-      <li><a href="index.php">Home</a></li>
+      <li><a href="../admin/index.php">Home</a></li>
       <li><a href="../mahasiswa/mahasiswaView.php">Mahasiswa</a></li>
-      <li><a href="../dosen/dosenView.php">Dosen</a></li>
-      <li><a href="../mahasiswa/nilaiView.php">Nilai</a></li>
+      <li><a href="../admin/dosenView.php">Dosen</a></li>
+      <li><a href="nilaiView.php">Nilai</a></li>
       <li><a href="../index.php">Logout</a></li>
     </ul>
   </section>
@@ -46,7 +46,7 @@ $countNilai = mysqli_num_rows($resultNilai);
     <br><br><br>
     <div style="padding: 0 30px 0 30px;">
       <div style="display: flex; justify-content: end;">
-        <a href="mahasiswaAdd.php" style="background-color: green; padding: 10px 20px 10px 20px; border-radius: 7px; font-weight: bold;">Tambah Data Mahasiswa</a>
+        <a href="nilaiAdd.php" style="background-color: green; padding: 10px 20px 10px 20px; border-radius: 7px; font-weight: bold;">Tambah Data Nilai</a>
       </div>
       <br><br>
 
@@ -75,8 +75,8 @@ $countNilai = mysqli_num_rows($resultNilai);
             echo "<td>" . $dataNilai['nip'] . "</td>";
             echo "<td>" . $dataNilai['nama_dosen'] . "</td>";
             echo "<td>
-              <a href='mahasiswaEdit.php?nim=" . $dataNilai['nim'] . "'>Edit</a> |
-              <a href='mahasiswaDelete.php?nim=" . $dataNilai['nim'] . "' onclick='return confirm(\"Yakin ingin menghapus?\")'>Delete</a>
+              <a href='nilaiEdit.php?nim=" . $dataNilai['nim'] . "'>Edit</a> |
+              <a href='nilaiDelete.php?nim=" . $dataNilai['nim'] . "' onclick='return confirm(\"Yakin ingin menghapus?\")'>Delete</a>
             </td>";
             echo "</tr>";
           }
