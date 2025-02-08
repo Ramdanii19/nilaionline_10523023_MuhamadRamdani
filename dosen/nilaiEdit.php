@@ -26,45 +26,24 @@ $dataMhs = mysqli_fetch_array($resultMhs);
     <form enctype="multipart/form-data" method="post">
       <table width="100%" border="0">
         <tr>
-          <td width="27%">Nim</td>
-          <td width="4%">:</td>
-          <td width="69%"><input type="text" name="nim" size="30" placeholder="NIM" value="<?php echo $dataMhs[3] ?>" readonly="readonly"></td>
+          <td>NIM</td>
+          <td>:</td>
+          <td><input type="text" name="nim" size="30" placeholder="NIM" value="<?php echo $dataMhs[3] ?>" readonly="readonly"></td>
         </tr>
         <tr>
-          <td>Nama</td>
+          <td>Nilai Tugas</td>
           <td>:</td>
-          <td><input type="text" name="nama" size="30" placeholder="Nama" value="<?php echo $dataMhs[1] ?>"></td>
+          <td><input type="number" name="tugas" size="30" placeholder="Tugas" value="<?php echo $dataMhs[0] ?>"></td>
         </tr>
         <tr>
-          <td>Jenis Kelamin</td>
+          <td>Nilai UTS</td>
           <td>:</td>
-          <td>
-            <label>
-              <input type="radio" name="jk" value="Laki-Laki"
-                <?php if ($dataMhs[2] == "Laki-Laki") echo "checked"; ?>> Laki Laki
-            </label>
-            <label>
-              <input type="radio" name="jk" value="Perempuan"
-                <?php if ($dataMhs[2] == "Lerempuan") echo "checked"; ?>> Perempuan
-            </label>
-          </td>
+          <td><input type="number" name="uts" size="30" placeholder="UTS" value="<?php echo $dataMhs[1] ?>"></td>
         </tr>
         <tr>
-          <td height="50">JURUSAN</td>
+          <td>Nilai UAS</td>
           <td>:</td>
-          <td>
-            <select name="jurusan">
-              <option value="<?php echo $dataMhs[3] ?>"><?php echo $dataMhs[3] ?></option>
-              <option value="Sistem Informasi">Sistem Informasi</option>
-              <option value="Teknik Informatika">Teknik Informatika</option>
-              <option value="Teknik Komputer">Teknik Komputer</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Password</td>
-          <td>:</td>
-          <td><input type="text" name="password" size="30" placeholder="PASSWORD" value="<?php echo $dataMhs[4] ?>"></td>
+          <td><input type="number" name="uas" size="30" placeholder="UAS" value="<?php echo $dataMhs[2] ?>"></td>
         </tr>
         <tr>
           <td><input name="submit" type="submit" value="Edit" style="color: white; text-decoration: none; background-color: green; padding: 5px 15px 5px 15px; border-radius: 5px; margin-top: 20px; border: none;"> <a href="mahasiswaView.php" style="color: white; text-decoration: none; background-color: blue; padding: 5px 15px 5px 15px; border-radius: 5px; margin-top: 20px;">Kembali</a></td>
@@ -73,21 +52,21 @@ $dataMhs = mysqli_fetch_array($resultMhs);
     </form>
   <?php
   } else {
-    $nim = $_POST["nim"];
-    $nama = $_POST["nama"];
-    $jk = $_POST["jk"];
-    $jurusan = $_POST["jurusan"];
-    $password = $_POST["password"];
+    $mahasiswa = $_POST["nim"];
+    $dosen = $_POST["dosen"];
+    $tugas = $_POST["tugas"];
+    $uts = $_POST["uts"];
+    $uas = $_POST["uas"];
 
-    $updateMhs = "UPDATE mahasiswa SET nama='$nama', jk='$jk', jur='$jurusan', password='$password'";
-    $queryMhs = mysqli_query($koneksi, $updateMhs);
+    $updateNilai = "UPDATE nilai SET tugas='$tugas', uts='$uts', uas='$uas' WHERE nim='$mahasiswa'";
+    $queryNilai = mysqli_query($koneksi, $updateNilai);
 
-    if ($queryMhs) {
+    if ($queryNilai) {
       echo "<script>alert('Daftar Berhasil Disimpan !') </script>";
-      echo "<script type='text/javascript'>window.location = 'mahasiswaView.php'</script>";
+      echo "<script type='text/javascript'>window.location = 'nilaiView.php'</script>";
     } else {
       echo "<script>alert('Daftar Gagal Disimpan !') </script>";
-      echo "<script type='text/javascript'>window.location = 'mahasiswaView.php'</script>";
+      echo "<script type='text/javascript'>window.location = 'nilaiView.php'</script>";
     }
   }
   ?>
