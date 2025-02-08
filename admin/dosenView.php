@@ -42,7 +42,7 @@ $countDosen = mysqli_num_rows($resultDosen);
     <br><br><br>
     <div style="padding: 0 30px 0 30px;">
       <div style="display: flex; justify-content: end;">
-        <a href="mahasiswaAdd.php" style="background-color: green; padding: 10px 20px 10px 20px; border-radius: 7px; font-weight: bold;">Tambah Data Mahasiswa</a>
+        <a href="dosenAdd.php" style="background-color: green; padding: 10px 20px 10px 20px; border-radius: 7px; font-weight: bold;">Tambah Data Dosen</a>
       </div>
       <br><br>
 
