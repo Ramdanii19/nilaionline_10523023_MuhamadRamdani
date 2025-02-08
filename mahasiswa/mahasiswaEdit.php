@@ -77,7 +77,7 @@ $dataMhs = mysqli_fetch_array($resultMhs);
     $nama = $_POST["nama"];
     $jk = $_POST["jk"];
     $jurusan = $_POST["jurusan"];
-    $password = $_POST["password"];
+    $password = md5($_POST["password"]);
 
     $updateMhs = "UPDATE mahasiswa SET nama='$nama', jk='$jk', jur='$jurusan', password='$password' WHERE nim ='$nim'";
     $queryMhs = mysqli_query($koneksi, $updateMhs);

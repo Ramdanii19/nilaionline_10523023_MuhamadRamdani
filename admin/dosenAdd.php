@@ -49,7 +49,7 @@ include "../koneksi/koneksi.php";
     $nip = $_POST["nip"];
     $nama = $_POST["nama"];
     $kode_matkul = $_POST["kode_matkul"];
-    $password = $_POST["password"];
+    $password = md5($_POST["password"]);
 
     $insertDosen = "INSERT INTO dosen (nip, nama, kode_matkul, password) VALUES ('$nip', '$nama', '$kode_matkul', '$password')";
     $queryDosen = mysqli_query($koneksi, $insertDosen);

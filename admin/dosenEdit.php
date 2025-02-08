@@ -55,7 +55,7 @@ $dataDosen = mysqli_fetch_array($resultDosen);
     $nip = $_POST["nip"];
     $nama = $_POST["nama"];
     $kode_matkul = $_POST["kode_matkul"];
-    $password = $_POST["password"];
+    $password = md5($_POST["password"]);
 
     $updatedosen = "UPDATE dosen SET nama='$nama', kode_matkul='$kode_matkul', password='$password' WHERE nip ='$nip'";
     $querydosen = mysqli_query($koneksi, $updatedosen);

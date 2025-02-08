@@ -52,7 +52,6 @@ $countMhs = mysqli_num_rows($resultMhs);
           <th>Nama</th>
           <th>Jenis Kelamin</th>
           <th>Jurusan</th>
-          <th>Password</th>
           <th>Aksi</th>
         </tr>
         <?php
@@ -63,7 +62,6 @@ $countMhs = mysqli_num_rows($resultMhs);
             echo "<td>" . $dataMhs['nama'] . "</td>";
             echo "<td>" . $dataMhs['jk'] . "</td>";
             echo "<td>" . $dataMhs['jur'] . "</td>";
-            echo "<td>" . $dataMhs['password'] . "</td>";
             echo "<td>
               <a href='mahasiswaEdit.php?nim=" . $dataMhs['nim'] . "'>Edit</a> |
               <a href='mahasiswaDelete.php?nim=" . $dataMhs['nim'] . "' onclick='return confirm(\"Yakin ingin menghapus?\")'>Delete</a>
