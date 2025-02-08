@@ -1,7 +1,8 @@
 <?php
 include "../koneksi/koneksi.php";
 
-if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'dosen' && $_SESSION['role'] !== 'admin')) {
+session_start();
+if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['dosen', 'admin'])) {
   header("Location: ../index.php");
   exit();
 }
