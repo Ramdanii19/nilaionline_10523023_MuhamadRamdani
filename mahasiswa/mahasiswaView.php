@@ -41,7 +41,7 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'mahasiswa' && $_SESSION
       <li><a href="mahasiswaView.php">Mahasiswa</a></li>
       <li><a href="../admin/dosenView.php">Dosen</a></li>
       <li><a href="../dosen/nilaiView.php">Nilai</a></li>
-      <li><a href="../index.php">Logout</a></li>
+      <li><a href="../logout.php">Logout</a></li>
     </ul>
   </section>
 
